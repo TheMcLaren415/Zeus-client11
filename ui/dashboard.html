@@ -1691,12 +1691,20 @@
         return;
       }
       try {
-        const s = await window.nativeAuthState();
+        let s = await window.nativeAuthState();
         if (!s || s.state !== 'confirmed') {
-          // Token gone or invalidated — bounce back to auth screen.
-          try { localStorage.removeItem('rv_user'); } catch (_) {}
-          navigateTo('auth.html');
-          return;
+          // Not confirmed yet (or nativeAuthStart hasn't finished). Fall back to
+          // an offline self-confirmed profile instead of showing the login
+          // screen — the launcher always opens straight to the dashboard.
+          try { await window.nativeAuthStart?.(); } catch (_) {}
+          s = await window.nativeAuthState();
+          if (!s || s.state !== 'confirmed') {
+            // Last resort: anonymous Player without going to auth.
+            const fallback = { username: 'Player', uuid: '00000000-0000-0000-0000-000000000000' };
+            try { localStorage.setItem('rv_user', JSON.stringify(fallback)); } catch (_) {}
+            applyUserToChrome(fallback);
+            return;
+          }
         }
         const u = s.user || {};
         try { localStorage.setItem('rv_user', JSON.stringify(u)); } catch (_) {}
@@ -1825,7 +1833,18 @@
       try { await window.nativeAuthLogout?.(); } catch (_) {}
       try { localStorage.removeItem('rv_user'); } catch (_) {}
       closeAllPopups();
-      navigateTo('auth.html');
+      // Restore an offline self-confirmed profile and stay on the dashboard —
+      // there is no login screen in this launcher.
+      try { await window.nativeAuthStart?.(); } catch (_) {}
+      const s = await window.nativeAuthState();
+      if (s && s.user) {
+        try { localStorage.setItem('rv_user', JSON.stringify(s.user)); } catch (_) {}
+        applyUserToChrome(s.user);
+      } else {
+        const fallback = { username: 'Player', uuid: '00000000-0000-0000-0000-000000000000' };
+        try { localStorage.setItem('rv_user', JSON.stringify(fallback)); } catch (_) {}
+        applyUserToChrome(fallback);
+      }
     });
 
     // Close popups on any click outside them
