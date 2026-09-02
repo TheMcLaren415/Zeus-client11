@@ -344,9 +344,11 @@
     };
 
     function catalogCard(mod) {
-      const icon = mod.icon
-        ? `<div class="mod-icon"><img src="${escapeHtml(mod.icon)}" alt="" onerror="this.parentElement.outerHTML='${escapeHtml(iconFallback(mod))}'"></div>`
-        : iconFallback(mod);
+      // Modrinth icons are WebP served from external CDNs; a known WebView2
+      // crash happens while decoding those (EmbeddedBrowserWebView fault at a
+      // fixed offset). Render a letter tile instead so the catalog never
+      // touches WebP decoding.
+      const icon = iconFallback(mod);
       const installed = isInstalledByName(mod.name);
       const badge = installed ? `<span class="mod-badge installed">✓ Установлено</span>` : '';
       const action = installed
