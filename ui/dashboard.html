@@ -1700,7 +1700,7 @@
           s = await window.nativeAuthState();
           if (!s || s.state !== 'confirmed') {
             // Last resort: anonymous Player without going to auth.
-            const fallback = { username: 'Player', uuid: '00000000-0000-0000-0000-000000000000' };
+            const fallback = { username: 'Player', uuid: '00000000-0000-0000-0000-000000000000', subscriptionActive: true, subscriptionFrozen: false };
             try { localStorage.setItem('rv_user', JSON.stringify(fallback)); } catch (_) {}
             applyUserToChrome(fallback);
             return;
