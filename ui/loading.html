@@ -110,9 +110,14 @@
           try { localStorage.removeItem('rv_user'); } catch (_) {}
         }
 
+        // Skip the login screen entirely — go straight to the dashboard
+        // (offline profile). Ensure a local session is confirmed first so the
+        // dashboard never bounces back to auth.
+        try { await window.nativeAuthStart?.(); } catch (_) {}
+
         // Small floor so the spinner doesn't flicker for fast paths.
         await new Promise(r => setTimeout(r, 250));
-        navigateTo(ok ? 'dashboard.html' : 'auth.html');
+        navigateTo('dashboard.html');
       });
     });
   </script>
