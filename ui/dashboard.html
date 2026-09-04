@@ -2007,8 +2007,10 @@
       // empty/undefined for the normal "Запустить" path. Native side reads it
       // off args[0] and passes through to bootstrapper as quick_play_server.
       let resp;
-      try { resp = await window.nativeLaunchStart?.(quickPlayServer || ''); }
-      catch (e) { resp = { ok: false, error: 'native call failed' }; }
+      try {
+        const raw = await window.nativeLaunchStart?.(quickPlayServer || '');
+        resp = (typeof raw === 'string') ? JSON.parse(raw) : raw;
+      } catch (e) { resp = { ok: false, error: 'native call failed' }; }
 
       if (!resp || !resp.ok) {
         // A failed "start" response may simply mean a launch is already in
@@ -2018,7 +2020,8 @@
         // long-existing nativeLaunchProgress so it works regardless of exe build.
         let inProgress = false;
         try {
-          const pv = await window.nativeLaunchProgress?.();
+          const raw = await window.nativeLaunchProgress?.();
+          const pv = (typeof raw === 'string') ? JSON.parse(raw) : raw;
           inProgress = !!pv && (pv.state === 'launching' || pv.state === 'running');
         } catch (_) {}
         if (!inProgress) {
@@ -2043,7 +2046,10 @@
 
     async function pollLaunch() {
       let p;
-      try { p = await window.nativeLaunchProgress?.(); }
+      try {
+        const raw = await window.nativeLaunchProgress?.();
+        p = (typeof raw === 'string') ? JSON.parse(raw) : raw;
+      }
       catch (_) { /* keep polling */ }
 
       if (p) {
