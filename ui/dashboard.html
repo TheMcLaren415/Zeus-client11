@@ -2099,7 +2099,7 @@
         return;
       }
       // error-like modal
-      try { await window.nativeDumpDiag?.('applyOutcome-' + outcome); } catch (_) {}
+      try { window.nativeDumpDiag?.('applyOutcome-' + outcome); } catch (_) {}
       setState(outcome); // 'error' | 'noaccess' | 'disconnected' | 'techworks'
     }
 
