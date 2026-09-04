@@ -2011,13 +2011,17 @@
       catch (e) { resp = { ok: false, error: 'native call failed' }; }
 
       if (!resp || !resp.ok) {
-        // A failed "start" response may simply mean the game is already up
-        // (e.g. a redundant click). If the JVM is alive, don't show a blocking
-        // error overlay — just poll live progress instead.
-        let alreadyRunning = false;
-        try { alreadyRunning = await window.nativeIsGameRunning?.() === true; } catch (_) {}
+        // A failed "start" response may simply mean a launch is already in
+        // progress (redundant click / double-fire): native state will be
+        // "launching" or "running". In that case don't show a blocking error
+        // overlay — just poll live progress instead.
+        let inProgress = false;
+        try {
+          const st = await window.nativeLaunchState?.();
+          inProgress = (st === 'launching' || st === 'running') || (await window.nativeIsGameRunning?.() === true);
+        } catch (_) {}
         try { await window.nativeDumpDiag?.('js-start-notok'); } catch (_) {}
-        if (alreadyRunning) {
+        if (inProgress) {
           pollLaunch();
           return;
         }
