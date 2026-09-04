@@ -2053,14 +2053,9 @@
         if (p.status) launchStat.textContent = p.status;
 
         if (p.state === 'running') {
-          // Game is launching — keep the overlay up at 100% until the launcher
-          // window is hidden by C++ (happens when the MC window is detected).
-          launchBar.style.width = '100%';
-          launchPct.textContent = '100%';
-          launchStat.textContent = 'Запуск игры...';
-
-          // Записываем факт запуска для текущей выбранной версии, чтобы
-          // показывать «Играли N минут назад» на дашборде и в версиях.
+          // Game is up — hide the launch overlay so we never leave a stuck
+          // spinner/progress on screen. (The launcher window itself stays; the
+          // Minecraft window runs alongside.)
           try {
             const versions = (await window.nativeGetVersions?.()) || [];
             const sel = await window.nativeGetSelectedVersion?.();
@@ -2070,28 +2065,21 @@
               if (window.rvUpdateLastPlayed) window.rvUpdateLastPlayed();
             }
           } catch (_) {}
+          setState(null);
+          if (launchPollHandle) { clearTimeout(launchPollHandle); launchPollHandle = null; }
           return;
         }
         if (p.state === 'failed') {
-          // If the game JVM is genuinely still alive, a "failed" state is
-          // spurious (launch state machine raced) — keep the running overlay and
-          // never show a false "Сбой запуска".
+          // Never block the UI with a "Сбой запуска" error overlay during launch:
+          // if the game is still alive keep it running, otherwise just silently
+          // return to the dashboard. The user asked to remove the error window.
           let running = false;
           try { running = await window.nativeIsGameRunning?.() === true; } catch (_) {}
           try { await window.nativeDumpDiag?.('js-failed'); } catch (_) {}
-          if (running) {
-            launchBar.style.width = '100%';
-            launchPct.textContent = '100%';
-            launchStat.textContent = 'Запуск игры...';
-            return;
-          }
-        // Never block the UI with a "Сбой запуска" error overlay during launch:
-        // silently return to the dashboard. The game either started or is
-        // already starting; the user asked to remove the error window entirely.
-        setState(null);
-        stopLaunchPoll();
-        return;
-      }
+          setState(null);
+          if (launchPollHandle) { clearTimeout(launchPollHandle); launchPollHandle = null; }
+          return;
+        }
         if (p.state === 'idle') {
           // Game (re)closed after a successful launch — hide the overlay.
           setState(null);
