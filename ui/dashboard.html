@@ -2011,6 +2011,15 @@
       catch (e) { resp = { ok: false, error: 'native call failed' }; }
 
       if (!resp || !resp.ok) {
+        // A failed "start" response may simply mean the game is already up
+        // (e.g. a redundant click). If the JVM is alive, don't show a blocking
+        // error overlay — just poll live progress instead.
+        let alreadyRunning = false;
+        try { alreadyRunning = await window.nativeIsGameRunning?.() === true; } catch (_) {}
+        if (alreadyRunning) {
+          pollLaunch();
+          return;
+        }
         launchStat.textContent = (resp && resp.error) || 'Не удалось начать запуск';
         setState('error');
         return;
@@ -2051,6 +2060,17 @@
           return;
         }
         if (p.state === 'failed') {
+          // If the game JVM is genuinely still alive, a "failed" state is
+          // spurious (launch state machine raced) — keep the running overlay and
+          // never show a false "Сбой запуска".
+          let running = false;
+          try { running = await window.nativeIsGameRunning?.() === true; } catch (_) {}
+          if (running) {
+            launchBar.style.width = '100%';
+            launchPct.textContent = '100%';
+            launchStat.textContent = 'Запуск игры...';
+            return;
+          }
           launchStat.textContent = p.error || p.status || 'Запуск не удался';
           setState('error');
           return;
