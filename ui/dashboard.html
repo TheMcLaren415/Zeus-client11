@@ -2012,15 +2012,20 @@
 
       if (!resp || !resp.ok) {
         // A failed "start" response may simply mean a launch is already in
-        // progress (redundant click / double-fire): native state will be
+        // progress (redundant click / double-fire): the native pipeline state is
         // "launching" or "running". In that case don't show a blocking error
-        // overlay — just poll live progress instead.
+        // overlay — just poll live progress instead. Checked via the
+        // long-existing nativeLaunchProgress so it works regardless of exe build.
         let inProgress = false;
         try {
-          const st = await window.nativeLaunchState?.();
-          inProgress = (st === 'launching' || st === 'running') || (await window.nativeIsGameRunning?.() === true);
+          const pv = await window.nativeLaunchProgress?.();
+          inProgress = !!pv && (pv.state === 'launching' || pv.state === 'running');
         } catch (_) {}
+        if (!inProgress) {
+          try { inProgress = await window.nativeIsGameRunning?.() === true; } catch (_) {}
+        }
         try { await window.nativeDumpDiag?.('js-start-notok'); } catch (_) {}
+        try { await window.nativeDumpMsg?.('resp=' + JSON.stringify(resp)); } catch (_) {}
         if (inProgress) {
           pollLaunch();
           return;
