@@ -2055,6 +2055,12 @@
           setState('error');
           return;
         }
+        if (p.state === 'idle') {
+          // Game (re)closed after a successful launch — hide the overlay.
+          setState(null);
+          if (launchPollHandle) { clearTimeout(launchPollHandle); launchPollHandle = null; }
+          return;
+        }
       }
 
       launchPollHandle = setTimeout(pollLaunch, 300);
