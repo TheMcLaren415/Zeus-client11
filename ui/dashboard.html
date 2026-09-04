@@ -2030,8 +2030,11 @@
           pollLaunch();
           return;
         }
-        launchStat.textContent = (resp && resp.error) || 'Не удалось начать запуск';
-        setState('error');
+        // Never block the UI with a "Сбой запуска" error overlay during launch:
+        // silently return to the dashboard. The game either started or is
+        // already starting; the user asked to remove the error window entirely.
+        setState(null);
+        stopLaunchPoll();
         return;
       }
 
@@ -2082,10 +2085,13 @@
             launchStat.textContent = 'Запуск игры...';
             return;
           }
-          launchStat.textContent = p.error || p.status || 'Запуск не удался';
-          setState('error');
-          return;
-        }
+        // Never block the UI with a "Сбой запуска" error overlay during launch:
+        // silently return to the dashboard. The game either started or is
+        // already starting; the user asked to remove the error window entirely.
+        setState(null);
+        stopLaunchPoll();
+        return;
+      }
         if (p.state === 'idle') {
           // Game (re)closed after a successful launch — hide the overlay.
           setState(null);
