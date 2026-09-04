@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
@@ -143,7 +143,8 @@
       position: relative; z-index: 1;
     }
     .nav-btn.active img {
-      filter: brightness(0) saturate(100%) invert(23%) sepia(92%) saturate(1658%) hue-rotate(215deg) brightness(88%) contrast(97%);
+      filter: brightness(0) saturate(200%) invert(55%) sepia(90%)
+              saturate(800%) hue-rotate(345deg) brightness(105%);
     }
     .nav-label {
       position: absolute; bottom: 8px;
@@ -249,7 +250,7 @@
       position: absolute;
       left: 0; top: 0;
       height: 100%;
-      background: #2563EB;
+      background: #FF7B1D;
       border-radius: 16px;
       transition: width 0.1s ease;
     }
@@ -308,9 +309,9 @@
       transition: background 0.15s ease, border-color 0.15s ease;
     }
     .path-btn:hover {
-      background: #2563EB;
+      background: #FF7B1D;
       border-color: transparent;
-      box-shadow: 0 5px 16px rgba(37, 99, 235, 0.34);
+      box-shadow: 0 5px 16px rgba(255, 123, 29, 0.34);
     }
 
     /* ── Footer ── */
@@ -456,8 +457,8 @@
       transition: transform 0.18s, background 0.18s;
     }
     .toggle input:checked + .toggle-slider {
-      background: #2563EB;
-      box-shadow: 0 5px 16px rgba(37, 99, 235, 0.34);
+      background: #FF7B1D;
+      box-shadow: 0 5px 16px rgba(255, 123, 29, 0.34);
     }
     .toggle input:checked + .toggle-slider::before {
       transform: translate(22px, -50%);
@@ -504,7 +505,17 @@
       </div>
       <div class="titlebar-right">
         <div style="display:flex;align-items:center;gap:12px;">
-
+          <div class="account-pill" id="account-pill">
+            <img class="avatar-sm" alt="">
+            <script>(function(){var c=window.__rvCache;if(!c){try{c=JSON.parse(localStorage.getItem('rv_user')||'null');}catch(_){}}var s=c&&(c.avatarDataUrl||c.avatarUrl);if(s)document.currentScript.previousElementSibling.src=s;})();</script>
+            <div class="pill-info">
+              <span class="pill-username"></span><script>(function(){var c=window.__rvCache;if(!c){try{c=JSON.parse(localStorage.getItem('rv_user')||'null');}catch(_){}}if(c&&c.username)document.currentScript.previousElementSibling.textContent=c.username;})();</script>
+              <div class="pill-dot"></div>
+            </div>
+            <div class="pill-down">
+              <img src="../assets/icons/down.svg" alt="">
+            </div>
+          </div>
         </div>
         <div class="window-controls">
           <button class="btn-wc" id="btn-hide"><img src="../assets/icons/hide.svg" alt=""></button>
@@ -540,6 +551,9 @@
             <span class="nav-label">Настройки</span>
           </button>
         </div>
+        <button class="nav-btn nav-quit" id="btn-quit">
+          <img src="../assets/icons/quit.svg" alt="">
+        </button>
       </div>
 
       <!-- Quit confirmation popup — anchored next to the quit button -->
@@ -588,7 +602,7 @@
             <span class="section-desc">Расположение файлов игры и поведение лоадера.</span>
           </div>
           <div class="path-row">
-            <div class="path-field" id="path-field" title="C:\Users\cutthroatpublicenemy\AppData\Roaming\.zeusclient">C:\Users\cutthroatpublicenemy\AppData\Roaming\.zeusclient</div>
+            <div class="path-field" id="path-field" title="C:\Users\cutthroatpublicenemy\AppData\Roaming\.reallyvisuals">C:\Users\cutthroatpublicenemy\AppData\Roaming\.reallyvisuals</div>
             <button class="path-btn" id="path-btn">Изменить</button>
           </div>
         </div>
@@ -659,9 +673,11 @@
       <div class="popup-item" data-action="open-folder"><div class="popup-item-icon"><img src="../assets/icons/folder.svg" alt=""></div><span class="popup-item-label">Открыть папку</span></div>
       <div class="popup-item" data-action="open-mods"><div class="popup-item-icon"><img src="../assets/icons/folder.svg" alt=""></div><span class="popup-item-label">Папка с модами</span></div>
       <div class="popup-divider"></div>
-      <div class="popup-item" data-url="https://zeus-client.zeusclient.workers.dev/"><div class="popup-item-icon"><img src="../assets/icons/link.svg" alt=""></div><span class="popup-item-label">Поддержка</span></div>
-      <div class="popup-item" data-url="https://discord.gg/8G5uBCwWvn"><div class="popup-item-icon"><img src="../assets/icons/link.svg" alt=""></div><span class="popup-item-label">Discord</span></div>
-      <div class="popup-item" data-url="https://t.me/+PWSZRPgU2pEzNGNi"><div class="popup-item-icon"><img src="../assets/icons/link.svg" alt=""></div><span class="popup-item-label">Telegram</span></div>
+      <div class="popup-item" data-url="https://help.reallyvisuals.me/"><div class="popup-item-icon"><img src="../assets/icons/link.svg" alt=""></div><span class="popup-item-label">Поддержка</span></div>
+      <div class="popup-item" data-url="https://discord.gg/reallyvisuals"><div class="popup-item-icon"><img src="../assets/icons/link.svg" alt=""></div><span class="popup-item-label">Discord</span></div>
+      <div class="popup-item" data-url="https://t.me/reallyvisuals"><div class="popup-item-icon"><img src="../assets/icons/link.svg" alt=""></div><span class="popup-item-label">Telegram</span></div>
+      <div class="popup-item" data-url="https://reallyvisuals.me"><div class="popup-item-icon"><img src="../assets/icons/link.svg" alt=""></div><span class="popup-item-label">Сайт</span></div>
+      <div class="popup-item" data-url="https://reallyvisuals.me/faq"><div class="popup-item-icon"><img src="../assets/icons/link.svg" alt=""></div><span class="popup-item-label">FAQ</span></div>
       <div class="popup-divider"></div>
       <div class="popup-item" data-nav="settings.html"><div class="popup-item-icon"><img src="../assets/icons/settings.svg" alt=""></div><span class="popup-item-label">Настройки</span></div>
     </div>
@@ -745,7 +761,7 @@
     // .titlebar visually sits at y=20..44 (after .app's 20px top padding) so a
     // click in the topmost 20 pixels would otherwise miss the drag handler.
     // Listen on body and gate by clientY < 44 so the entire top edge grabs.
-    const NODRAG = '#btn-hide,#btn-close,.logo-down,.popup';
+    const NODRAG = '#btn-hide,#btn-close,.account-pill,.logo-down,.popup';
     document.body.addEventListener('mousedown', (e) => {
       if (e.button !== 0) return;
       if (e.clientY > 44) return;
@@ -757,11 +773,23 @@
     document.addEventListener('contextmenu', (e) => e.preventDefault());
 
 
+    // ── Account pill ──
+    const accountPill = document.getElementById('account-pill');
+    const avatarSm    = accountPill.querySelector('.avatar-sm');
+    const pillDown    = accountPill.querySelector('.pill-down');
+    let avatarVisible = true;
+    accountPill.addEventListener('click', (e) => {
+      if (e.target.closest('.pill-down')) return;
+      avatarVisible = !avatarVisible;
+      avatarSm.classList.toggle('hidden', !avatarVisible);
+    });
+
     // ── Popups ──
     const popupClient  = document.getElementById('popup-client');
     const popupAccount = document.getElementById('popup-account');
     const popupQuit    = document.getElementById('popup-quit');
     const logoDown     = document.querySelector('.logo-down');
+    const btnQuit      = document.getElementById('btn-quit');
 
     function closeAllPopups() {
       popupClient.classList.remove('visible');
@@ -791,9 +819,30 @@
         navigateTo('dashboard.html');
       }
     });
+    pillDown.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const wasOpen = popupAccount.classList.contains('visible');
+      closeAllPopups();
+      if (!wasOpen) popupAccount.classList.add('visible');
+    });
+    btnQuit.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const wasOpen = popupQuit.classList.contains('visible');
+      closeAllPopups();
+      if (!wasOpen) popupQuit.classList.add('visible');
+    });
+    document.getElementById('quit-confirm').addEventListener('click', () => {
+      popupQuit.classList.remove('visible');
+      navigateTo('auth.html');
+    });
+    document.getElementById('quit-cancel').addEventListener('click', () => {
+      popupQuit.classList.remove('visible');
+    });
     document.addEventListener('mousedown', (e) => {
       if (e.target.closest('.popup')) return;
-      if (e.target.closest('.logo-down')) return;
+      if (e.target.closest('.logo-down') ||
+          e.target.closest('.pill-down') ||
+          e.target.closest('#btn-quit')) return;
       closeAllPopups();
     });
     document.addEventListener('keydown', (e) => {
