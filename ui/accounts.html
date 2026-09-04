@@ -1157,8 +1157,9 @@
 
     async function refreshAccounts() {
       try {
-        const raw = (await window.nativeGetAccounts?.()) || [];
-        accountsCache   = raw.filter(a => a && a.name);
+        const rawStr = (await window.nativeGetAccounts?.()) || '[]';
+        const raw = (typeof rawStr === 'string') ? JSON.parse(rawStr) : rawStr;
+        accountsCache   = (Array.isArray(raw) ? raw : []).filter(a => a && a.name);
         selectedIdCache = (await window.nativeGetSelectedAccount?.()) || '';
       } catch (_) {}
     }
@@ -1183,8 +1184,10 @@
       const name_ = (name || '').trim();
       if (!name_) return null;
       let added = null;
-      try { added = await window.nativeAddAccount?.(name_, type || 'local'); }
-      catch (_) {}
+      try {
+        const rawStr = await window.nativeAddAccount?.(name_, type || 'local');
+        added = (typeof rawStr === 'string') ? JSON.parse(rawStr) : rawStr;
+      } catch (_) {}
       if (added) await refreshAccounts();
       return added;
     }
