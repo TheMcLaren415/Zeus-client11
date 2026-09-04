@@ -2139,17 +2139,14 @@
 
     btnLaunch.addEventListener('click', () => {
       if (btnLaunch.disabled || btnLaunch.classList.contains('disabled')) return;
-      if (appEl.className.indexOf('state-') !== -1) return; // already in some state
       runLaunchSequence();
     });
 
     // Quick-launch server pills — click = launch with --quickPlayMultiplayer /
-    // --server pointing at the pill's data-server IP. Guards mirror btnLaunch
-    // so you can't fire mid-launch.
+    // --server pointing at the pill's data-server IP.
     document.querySelectorAll('.server-pill[data-server]').forEach(pill => {
       pill.addEventListener('click', () => {
         if (btnLaunch.disabled || btnLaunch.classList.contains('disabled')) return;
-        if (appEl.className.indexOf('state-') !== -1) return;
         const ip = pill.dataset.server;
         if (!ip) return;
         runLaunchSequence(ip);
