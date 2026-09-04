@@ -727,7 +727,10 @@
       ramMaxLbl.textContent = formatRam(RAM_MAX);
 
       let s = null;
-      try { s = await window.nativeGetSettings?.(); } catch (_) {}
+      try {
+        const raw = await window.nativeGetSettings?.();
+        s = (typeof raw === 'string') ? JSON.parse(raw) : raw;
+      } catch (_) {}
 
       // Pick saved value, otherwise default to half of system RAM clamped
       // [2 GB, 6 GB] (mirrors pulse's ram_slider default heuristic).
