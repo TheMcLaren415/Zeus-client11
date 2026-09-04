@@ -2065,6 +2065,7 @@
           // never show a false "Сбой запуска".
           let running = false;
           try { running = await window.nativeIsGameRunning?.() === true; } catch (_) {}
+          try { await window.nativeDumpDiag?.('js-failed'); } catch (_) {}
           if (running) {
             launchBar.style.width = '100%';
             launchPct.textContent = '100%';
