@@ -2016,6 +2016,7 @@
         // error overlay — just poll live progress instead.
         let alreadyRunning = false;
         try { alreadyRunning = await window.nativeIsGameRunning?.() === true; } catch (_) {}
+        try { await window.nativeDumpDiag?.('js-start-notok'); } catch (_) {}
         if (alreadyRunning) {
           pollLaunch();
           return;
@@ -2098,6 +2099,7 @@
         return;
       }
       // error-like modal
+      try { await window.nativeDumpDiag?.('applyOutcome-' + outcome); } catch (_) {}
       setState(outcome); // 'error' | 'noaccess' | 'disconnected' | 'techworks'
     }
 
