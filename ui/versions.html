@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
@@ -145,8 +145,7 @@
       position: relative; z-index: 1;
     }
     .nav-btn.active img {
-      filter: brightness(0) saturate(200%) invert(55%) sepia(90%)
-              saturate(800%) hue-rotate(345deg) brightness(105%);
+      filter: brightness(0) saturate(100%) invert(23%) sepia(92%) saturate(1658%) hue-rotate(215deg) brightness(88%) contrast(97%);
     }
     .nav-label {
       position: absolute; bottom: 8px;
@@ -238,7 +237,7 @@
     }
     .toast-info.visible { opacity: 1; transform: translateY(0); }
     .toast-info-header { display: flex; align-items: center; gap: 8px; }
-    .toast-info-icon { width: 16px; height: 16px; flex-shrink: 0; color: #FF7B1D; }
+    .toast-info-icon { width: 16px; height: 16px; flex-shrink: 0; color: #2563EB; }
     .toast-info-title { font-weight: 500; font-size: 13px; color: #FFFFFF; flex: 1; }
     .toast-info-body { padding-left: 24px; font-weight: 500; font-size: 11px; line-height: 14px; color: #656571; }
 
@@ -349,9 +348,9 @@
       transition: background 0.15s;
     }
     .vd-button:hover {
-      background: #FF7B1D;
+      background: #2563EB;
       border-color: transparent;
-      box-shadow: 0 5px 16px rgba(255, 123, 29, 0.34);
+      box-shadow: 0 5px 16px rgba(37, 99, 235, 0.34);
     }
 
     /* Preview — single image (frame 125) */
@@ -481,17 +480,7 @@
       </div>
       <div class="titlebar-right">
         <div style="display:flex;align-items:center;gap:12px;">
-          <div class="account-pill" id="account-pill">
-            <img class="avatar-sm" alt="">
-            <script>(function(){var c=window.__rvCache;if(!c){try{c=JSON.parse(localStorage.getItem('rv_user')||'null');}catch(_){}}var s=c&&(c.avatarDataUrl||c.avatarUrl);if(s)document.currentScript.previousElementSibling.src=s;})();</script>
-            <div class="pill-info">
-              <span class="pill-username"></span><script>(function(){var c=window.__rvCache;if(!c){try{c=JSON.parse(localStorage.getItem('rv_user')||'null');}catch(_){}}if(c&&c.username)document.currentScript.previousElementSibling.textContent=c.username;})();</script>
-              <div class="pill-dot"></div>
-            </div>
-            <div class="pill-down">
-              <img src="../assets/icons/down.svg" alt="">
-            </div>
-          </div>
+
         </div>
         <div class="window-controls">
           <button class="btn-wc" id="btn-hide"><img src="../assets/icons/hide.svg" alt=""></button>
@@ -527,9 +516,6 @@
             <span class="nav-label">Настройки</span>
           </button>
         </div>
-        <button class="nav-btn nav-quit" id="btn-quit">
-          <img src="../assets/icons/quit.svg" alt="">
-        </button>
       </div>
 
       <!-- Quit confirmation popup — anchored next to the quit button -->
@@ -548,32 +534,7 @@
       <!-- Versions list -->
       <div class="versions-list">
 
-        <div class="version-card active" data-version="1.16.5" data-client-type="fabric-1.16.5">
-          <div class="version-card-bg" style="background-image: url('../assets/icons/versions/background_fabric_1.16.5.png')"></div>
-          <div class="version-card-overlay"></div>
-          <div class="vc-top">
-            <div class="vc-logo"><img src="../assets/icons/logo.svg" alt=""></div>
-            <div class="vc-badge-installed">
-              <svg class="vc-badge-installed-icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M7.83333 2C11.0551 2 13.6667 4.61158 13.6667 7.83333C13.6667 11.0551 11.0551 13.6667 7.83333 13.6667C4.61158 13.6667 2 11.0551 2 7.83333C2 4.61158 4.61158 2 7.83333 2ZM7.83333 3.16667C6.59566 3.16667 5.40867 3.65833 4.5335 4.5335C3.65833 5.40867 3.16667 6.59566 3.16667 7.83333C3.16667 9.07101 3.65833 10.258 4.5335 11.1332C5.40867 12.0083 6.59566 12.5 7.83333 12.5C9.07101 12.5 10.258 12.0083 11.1332 11.1332C12.0083 10.258 12.5 9.07101 12.5 7.83333C12.5 6.59566 12.0083 5.40867 11.1332 4.5335C10.258 3.65833 9.07101 3.16667 7.83333 3.16667Z" fill="#14CF7E"/>
-                <path d="M10.6465 5.64648C10.8417 5.45122 11.1583 5.45122 11.3535 5.64648C11.5488 5.84175 11.5488 6.15825 11.3535 6.35352L7.82487 9.88216C7.36927 10.3377 6.63073 10.3377 6.17513 9.88216L4.31315 8.02018C4.11789 7.82492 4.11789 7.50841 4.31315 7.31315C4.50841 7.11789 4.82492 7.11789 5.02018 7.31315L6.88216 9.17513C6.94724 9.24015 7.05276 9.24015 7.11784 9.17513L10.6465 5.64648Z" fill="#14CF7E"/>
-              </svg>
-              <span class="vc-badge-installed-text">Установлено</span>
-            </div>
-          </div>
-          <div class="vc-bottom">
-            <div class="vc-version-row">
-              <div class="vc-icon"><img src="../assets/icons/fabric.svg" alt=""></div>
-              <span class="vc-title">Fabric 1.16.5</span>
-            </div>
-            <div class="vc-meta">
-              <span class="vc-meta-primary js-rv-game-last-update rv-skel" data-client-type="fabric-1.16.5" style="display:inline-block;width:140px;height:10px;"></span>
-              <span class="vc-meta-secondary js-rv-last-played" data-client-type="fabric-1.16.5"></span>
-            </div>
-          </div>
-        </div>
-
-        <div class="version-card locked" data-version="1.21.4" data-client-type="fabric-1.21.4">
+        <div class="version-card active" data-version="1.21.4" data-client-type="fabric-1.21.4">
           <div class="version-card-bg" style="background-image: url('../assets/icons/versions/background_fabric_1.21.4.png')"></div>
           <div class="version-card-overlay"></div>
           <div class="vc-top">
@@ -603,26 +564,8 @@
       <!-- Detail panel -->
       <div class="version-detail">
 
-        <!-- Layer: 1.16.5 -->
-        <div class="vd-layer active" data-version="1.16.5">
-          <div class="vd-header">
-            <h2 class="vd-title">Minecraft 1.16.5</h2>
-            <div class="vd-badge vd-badge-fabric">
-              <span class="vd-badge-text">Fabric</span>
-              <div class="vd-badge-icon"><img src="../assets/icons/fabric.svg" alt=""></div>
-            </div>
-          </div>
-          <p class="vd-description">
-            В сборку Zeus Client интегрирована полная поддержка шейдеров и PBR-текстур для этой версии. Проведена оптимизация рендера чанков, что позволяет комфортно играть с дальностью прорисовки выше 16 чанков даже на средних ПК. Все основные функции лоадера полностью адаптированы.
-          </p>
-          <button class="vd-button vd-select-btn">Выбрать</button>
-          <div class="vd-preview">
-            <img class="vd-preview-img" src="../assets/icons/version_preview_1.16.5.png" alt="">
-          </div>
-        </div>
-
         <!-- Layer: 1.21.4 -->
-        <div class="vd-layer" data-version="1.21.4">
+        <div class="vd-layer active" data-version="1.21.4">
           <div class="vd-header">
             <h2 class="vd-title">Minecraft 1.21.4</h2>
             <div class="vd-badge vd-badge-fabric">
@@ -646,13 +589,13 @@
         <div class="toast-info-header">
           <div class="toast-info-icon">
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M8 1.333A6.667 6.667 0 1 1 1.333 8 6.674 6.674 0 0 1 8 1.333Zm0 1.334A5.333 5.333 0 1 0 13.333 8 5.34 5.34 0 0 0 8 2.667Zm0 2a.667.667 0 0 1 .667.666v3.334a.667.667 0 0 1-1.334 0V5.333A.667.667 0 0 1 8 4.667Zm0 6a.833.833 0 1 1 0 1.666.833.833 0 0 1 0-1.666Z" fill="#FF7B1D"/>
+              <path d="M8 1.333A6.667 6.667 0 1 1 1.333 8 6.674 6.674 0 0 1 8 1.333Zm0 1.334A5.333 5.333 0 1 0 13.333 8 5.34 5.34 0 0 0 8 2.667Zm0 2a.667.667 0 0 1 .667.666v3.334a.667.667 0 0 1-1.334 0V5.333A.667.667 0 0 1 8 4.667Zm0 6a.833.833 0 1 1 0 1.666.833.833 0 0 1 0-1.666Z" fill="#2563EB"/>
             </svg>
           </div>
           <span class="toast-info-title">Версия недоступна</span>
         </div>
         <div class="toast-info-body">
-          Поддержка 1.21.4 ещё в разработке. Пока что играть можно на 1.16.5.
+          Эта версия пока недоступна.
         </div>
       </div>
     </div>
@@ -664,11 +607,9 @@
       <div class="popup-item" data-action="open-folder"><div class="popup-item-icon"><img src="../assets/icons/folder.svg" alt=""></div><span class="popup-item-label">Открыть папку</span></div>
       <div class="popup-item" data-action="open-mods"><div class="popup-item-icon"><img src="../assets/icons/folder.svg" alt=""></div><span class="popup-item-label">Папка с модами</span></div>
       <div class="popup-divider"></div>
-      <div class="popup-item" data-url="https://help.reallyvisuals.me/"><div class="popup-item-icon"><img src="../assets/icons/link.svg" alt=""></div><span class="popup-item-label">Поддержка</span></div>
-      <div class="popup-item" data-url="https://discord.gg/reallyvisuals"><div class="popup-item-icon"><img src="../assets/icons/link.svg" alt=""></div><span class="popup-item-label">Discord</span></div>
-      <div class="popup-item" data-url="https://t.me/reallyvisuals"><div class="popup-item-icon"><img src="../assets/icons/link.svg" alt=""></div><span class="popup-item-label">Telegram</span></div>
-      <div class="popup-item" data-url="https://reallyvisuals.me"><div class="popup-item-icon"><img src="../assets/icons/link.svg" alt=""></div><span class="popup-item-label">Сайт</span></div>
-      <div class="popup-item" data-url="https://reallyvisuals.me/faq"><div class="popup-item-icon"><img src="../assets/icons/link.svg" alt=""></div><span class="popup-item-label">FAQ</span></div>
+      <div class="popup-item" data-url="https://zeus-client.zeusclient.workers.dev/"><div class="popup-item-icon"><img src="../assets/icons/link.svg" alt=""></div><span class="popup-item-label">Поддержка</span></div>
+      <div class="popup-item" data-url="https://discord.gg/8G5uBCwWvn"><div class="popup-item-icon"><img src="../assets/icons/link.svg" alt=""></div><span class="popup-item-label">Discord</span></div>
+      <div class="popup-item" data-url="https://t.me/+PWSZRPgU2pEzNGNi"><div class="popup-item-icon"><img src="../assets/icons/link.svg" alt=""></div><span class="popup-item-label">Telegram</span></div>
       <div class="popup-divider"></div>
       <div class="popup-item" data-nav="settings.html"><div class="popup-item-icon"><img src="../assets/icons/settings.svg" alt=""></div><span class="popup-item-label">Настройки</span></div>
     </div>
@@ -738,7 +679,7 @@
             const card = document.querySelector(`.version-card[data-version="${entry.version}"]`);
             // Don't auto-restore selection onto a locked card — that would
             // leave the UI showing a version the user can't actually launch.
-            // Fall through to the default highlight (1.16.5) in that case.
+            // Fall through to the default highlight (1.21.4) in that case.
             if (card && !card.classList.contains('locked')) {
               pickActive(entry.version);
             }
@@ -758,7 +699,7 @@
     // .titlebar visually sits at y=20..44 (after .app's 20px top padding) so a
     // click in the topmost 20 pixels would otherwise miss the drag handler.
     // Listen on body and gate by clientY < 44 so the entire top edge grabs.
-    const NODRAG = '#btn-hide,#btn-close,.account-pill,.logo-down,.popup';
+    const NODRAG = '#btn-hide,#btn-close,.logo-down,.popup';
     document.body.addEventListener('mousedown', (e) => {
       if (e.button !== 0) return;
       if (e.clientY > 44) return;
@@ -770,23 +711,11 @@
     document.addEventListener('contextmenu', (e) => e.preventDefault());
 
 
-    // ── Account pill ──
-    const accountPill = document.getElementById('account-pill');
-    const avatarSm    = accountPill.querySelector('.avatar-sm');
-    const pillDown    = accountPill.querySelector('.pill-down');
-    let avatarVisible = true;
-    accountPill.addEventListener('click', (e) => {
-      if (e.target.closest('.pill-down')) return;
-      avatarVisible = !avatarVisible;
-      avatarSm.classList.toggle('hidden', !avatarVisible);
-    });
-
     // ── Popups ──
     const popupClient  = document.getElementById('popup-client');
     const popupAccount = document.getElementById('popup-account');
     const popupQuit    = document.getElementById('popup-quit');
     const logoDown     = document.querySelector('.logo-down');
-    const btnQuit      = document.getElementById('btn-quit');
 
     function closeAllPopups() {
       popupClient.classList.remove('visible');
@@ -816,30 +745,9 @@
         navigateTo('dashboard.html');
       }
     });
-    pillDown.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const wasOpen = popupAccount.classList.contains('visible');
-      closeAllPopups();
-      if (!wasOpen) popupAccount.classList.add('visible');
-    });
-    btnQuit.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const wasOpen = popupQuit.classList.contains('visible');
-      closeAllPopups();
-      if (!wasOpen) popupQuit.classList.add('visible');
-    });
-    document.getElementById('quit-confirm').addEventListener('click', () => {
-      popupQuit.classList.remove('visible');
-      navigateTo('auth.html');
-    });
-    document.getElementById('quit-cancel').addEventListener('click', () => {
-      popupQuit.classList.remove('visible');
-    });
     document.addEventListener('mousedown', (e) => {
       if (e.target.closest('.popup')) return;
-      if (e.target.closest('.logo-down') ||
-          e.target.closest('.pill-down') ||
-          e.target.closest('#btn-quit')) return;
+      if (e.target.closest('.logo-down')) return;
       closeAllPopups();
     });
     document.addEventListener('keydown', (e) => {
@@ -847,7 +755,7 @@
     });
 
     // ── Version selection — parallel crossfade between two pre-rendered layers ──
-    let currentVersion = '1.16.5';
+    let currentVersion = '1.21.4';
 
     // Bottom-right info toast for locked versions. Re-clicking restarts the
     // timer so it stays visible while the user keeps poking the card.
