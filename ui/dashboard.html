@@ -1449,14 +1449,14 @@
       if (subText) subText.textContent = isFrozen ? 'Заморожена' : (isActive ? 'Активна' : 'Неактивна');
       if (subDot)  subDot.style.background = isActive ? '' : '#888';
 
-      // Disable launch button when there's no active subscription.
+      // Launch button is always enabled — the owner can start multiple game
+      // windows regardless of subscription state. Only the status text below
+      // reflects subscription/freeze status.
       const launchBtn = document.getElementById('btn-launch');
       if (launchBtn) {
-        launchBtn.classList.toggle('disabled', !isActive);
-        launchBtn.disabled = !isActive;
-        launchBtn.title = isActive
-          ? ''
-          : (isFrozen ? 'Подписка заморожена' : 'Подписка не активна');
+        launchBtn.classList.remove('disabled');
+        launchBtn.disabled = false;
+        launchBtn.title = '';
       }
 
       if (subExp) {
